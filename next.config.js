@@ -11,6 +11,7 @@ module.exports = {
     HeroSubTitle: "Breakfast, Lunch & Coffee",
     PhoneNumber: "07 3999 7543",
     Instagram: "https://www.instagram.com/ledgemudjimba/",
+    S3URL: "https://mudjimba-data.s3.ap-southeast-2.amazonaws.com/TheLedge.json",
 
     ActionColor: "#0d21a1",
     BackgroundColor: "#EEF0F2",

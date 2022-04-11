@@ -84,7 +84,7 @@ export default function Home() {
   const sendQuery = () => {
     fetch(
       // add to env variable
-      "https://mudjimba-data.s3.ap-southeast-2.amazonaws.com/TheLedge.json"
+      process.env.S3URL
     )
       .then((res) => res.json())
       .then((data) => {
