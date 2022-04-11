@@ -59,7 +59,7 @@ export default function Home() {
     //Looks up the s3 JSON file and perpetuates the data throughout the program, read function for more deets
     sendQuery();
 
-    console.log(process.env.test)
+    alert(process.env.test)
   }, []);
 
   const retrieveMenuSection = (section) => {
@@ -140,6 +140,7 @@ export default function Home() {
           <div className="hero">
             <div className="heading">
               <p>{process.env.Name}</p>
+              <p>{process.env.test}</p>
               <p>{process.env.HeroSubtitle}</p>
             </div>
 
