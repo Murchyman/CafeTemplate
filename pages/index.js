@@ -138,7 +138,7 @@ export default function Home() {
           <div className="hero">
             <div className="heading">
               <p>{process.env.Name}</p>
-
+              <p>{process.env.test}</p>
               <p>{process.env.HeroSubtitle}</p>
             </div>
 
