@@ -134,14 +134,11 @@ export default function Home() {
       </Head>
       <div className="container">
         <div className="main">
-          <p>
-            {" "}
-            {process.env.test}
-            160 Mudjimba Beach Road - phone {process.env.PhoneNumber}
-          </p>
+          <p>160 Mudjimba Beach Road - phone {process.env.PhoneNumber}</p>
           <div className="hero">
             <div className="heading">
               <p>{process.env.Name}</p>
+              <p>{process.env.test}</p>
               <p>{process.env.HeroSubtitle}</p>
             </div>
 
