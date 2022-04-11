@@ -86,15 +86,7 @@ export default css.global`
     margin-left: 5em;
   }
 
-  .menuContainer {
-    margin-top: 2em;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
-  }
+
 
   .menu {
     width: 100%;

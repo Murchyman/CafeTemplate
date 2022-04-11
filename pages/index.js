@@ -41,8 +41,10 @@ export default function Home() {
   //so it throws an error, thus I initialise the state and having a null element at [0][0] so it doesn't throw an error...... god help me.
   //I also have empty elements at each of the other four indexes for the other menu headings.
   //this is so messy and I'm sure I'll read this in a year with a better understanding of asyncronous programming and laugh my head off at the retardation.
-  const [RawJSON, setRawJSON] = useState([[[[]], [[]], [[]], [[]]]], [[], [], [], [], [], [], []]);
-
+  const [RawJSON, setRawJSON] = useState(
+    [[[[]], [[]], [[]], [[]]]],
+    [[], [], [], [], [], [], []]
+  );
 
   //need to find a way to do this so that I can have an undefined amount of sections, IE one section 100 sections
   //I need to make it programatic in that way rather than manualy defining each section and having an empty section at the end that makes me want to scream.
@@ -51,12 +53,12 @@ export default function Home() {
   const [MenuSection3, setMenuSection3] = useState([]);
   const [MenuSection4, setMenuSection4] = useState([]);
   const [TimeTable, setTimeTable] = useState([]);
+  //prevents pop in by displaying nothing before data is loaded
+  var [MenuIsLoaded, setMenuIsLoaded] = useState(false);
   useEffect(() => {
     //Looks up the s3 JSON file and perpetuates the data throughout the program, read function for more deets
     sendQuery();
-
   }, []);
-
 
   const retrieveMenuSection = (section) => {
     return section.map((item, index) => {
@@ -76,8 +78,7 @@ export default function Home() {
         </div>
       );
     });
-  }
-
+  };
 
   //retrieve a JSON doc containing the menu, deliniated by menu section, pass each array into it's own state.
   const sendQuery = () => {
@@ -96,7 +97,8 @@ export default function Home() {
         setMenuSection3(retrieveMenuSection(data[0][2]));
         setMenuSection4(retrieveMenuSection(data[0][3]));
         setTimeTable(data[1]);
-
+        //prevents pop in of menu when page loads
+        setMenuIsLoaded(true);
         const day = new Date().getDay();
         //the 2nd(1st) index of the array is an array of elements, each of the 2nd dimention elements contains the times the store is open on the day of the week which the index corrosponds to
         //IE 0 = Sunday = the time the store is open on Sunday
@@ -105,13 +107,24 @@ export default function Home() {
       });
   };
 
-
-
   return (
     <>
       <style jsx global>
         {globalStyles}
       </style>
+      <style jsx>{`
+        .menuContainer {
+          margin-top: 2em;
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: flex-start;
+          width: 100%;
+          height: 100%;
+          //if data is not loaded display nothing
+          ${MenuIsLoaded ? "" : "display: none;"}
+        }
+      `}</style>
       <style jsx>{HomeModule}</style>
 
       <Head>
@@ -171,10 +184,7 @@ export default function Home() {
           </div>
           <div className="menuContainer">
             <div className="MenuNav">
-              <MenuNav
-                Menu={RawJSON[0]}
-
-              />
+              <MenuNav Menu={RawJSON[0]} />
             </div>
             <div className="menu">
               <Menu
