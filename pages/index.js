@@ -131,7 +131,7 @@ export default function Home() {
       <Head>
         <title>{process.env.NEXT_PUBLIC_Name}</title>
         <meta name="description" content={process.env.NEXT_PUBLIC_WebDescription} />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={process.env.NEXT_PUBLIC_Favicon} />
       </Head>
       <div className="container">
         <div className="main">
