@@ -58,7 +58,6 @@ export default function Home() {
   useEffect(() => {
     //Looks up the s3 JSON file and perpetuates the data throughout the program, read function for more deets
     sendQuery();
-
   }, []);
 
   const retrieveMenuSection = (section) => {
@@ -113,16 +112,10 @@ export default function Home() {
       <style jsx global>
         {globalStyles}
       </style>
+
+      {/* //if data is not loaded don't display unpopulated menu */}
       <style jsx>{`
         .menuContainer {
-          margin-top: 2em;
-          display: flex;
-          flex-direction: row;
-          align-items: flex-start;
-          justify-content: flex-start;
-          width: 100%;
-          height: 100%;
-          //if data is not loaded display nothing
           ${MenuIsLoaded ? "" : "display: none;"}
         }
       `}</style>
@@ -130,16 +123,21 @@ export default function Home() {
 
       <Head>
         <title>{process.env.NEXT_PUBLIC_Name}</title>
-        <meta name="description" content={process.env.NEXT_PUBLIC_WebDescription} />
+        <meta
+          name="description"
+          content={process.env.NEXT_PUBLIC_WebDescription}
+        />
         <link rel="icon" href={process.env.NEXT_PUBLIC_Favicon} />
       </Head>
       <div className="container">
         <div className="main">
-          <p>160 Mudjimba Beach Road - phone {process.env.NEXT_PUBLIC_PhoneNumber}</p>
+          <p>
+            160 Mudjimba Beach Road - phone{" "}
+            {process.env.NEXT_PUBLIC_PhoneNumber}
+          </p>
           <div className="hero">
             <div className="heading">
               <p>{process.env.NEXT_PUBLIC_Name}</p>
-              <p>{process.env.NEXT_PUBLIC_test}</p>
               <p>{process.env.NEXT_PUBLIC_HeroSubtitle}</p>
             </div>
 
