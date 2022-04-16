@@ -12,7 +12,15 @@ export default css.global`
     padding-right: 4em;
     padding-bottom: 3em;
   }
-
+  .hero {
+    outline: solid 0.2em var(--ActionColour);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+ 
+      min-height: 100%;
+  }
   .heading {
     margin-top: 3em;
     text-align: center;
@@ -169,6 +177,7 @@ export default css.global`
 
     .hero {
       padding: 1em;
+      
     }
 
     .left {
@@ -214,12 +223,5 @@ export default css.global`
     }
   }
 
-  .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
- 
-      min-height: 100%;
-  }
+
 `;
