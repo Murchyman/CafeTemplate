@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#0D21A1",
+      main: process.env.NEXT_PUBLIC_ActionColor,
     },
   },
 });
