@@ -59,7 +59,6 @@ export default function Home() {
     //Looks up the s3 JSON file and perpetuates the data throughout the program, read function for more deets
     sendQuery();
 
-    alert(process.env.NEXT_PUBLIC_test)
   }, []);
 
   const retrieveMenuSection = (section) => {
@@ -86,7 +85,7 @@ export default function Home() {
   const sendQuery = () => {
     fetch(
       // add to env variable
-      process.env.S3URL
+      process.env.NEXT_PUBLIC_S3URL
     )
       .then((res) => res.json())
       .then((data) => {
@@ -130,18 +129,18 @@ export default function Home() {
       <style jsx>{HomeModule}</style>
 
       <Head>
-        <title>{process.env.Name}</title>
-        <meta name="description" content={process.env.WebDescription} />
+        <title>{process.env.NEXT_PUBLIC_Name}</title>
+        <meta name="description" content={process.env.NEXT_PUBLIC_WebDescription} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container">
         <div className="main">
-          <p>160 Mudjimba Beach Road - phone {process.env.PhoneNumber}</p>
+          <p>160 Mudjimba Beach Road - phone {process.env.NEXT_PUBLIC_PhoneNumber}</p>
           <div className="hero">
             <div className="heading">
-              <p>{process.env.Name}</p>
-              <p>{process.env.test}</p>
-              <p>{process.env.HeroSubtitle}</p>
+              <p>{process.env.NEXT_PUBLIC_Name}</p>
+              <p>{process.env.NEXT_PUBLIC_test}</p>
+              <p>{process.env.NEXT_PUBLIC_HeroSubtitle}</p>
             </div>
 
             <div className="subHeading">
@@ -149,12 +148,12 @@ export default function Home() {
             </div>
 
             <div className="heroText">
-              <p>{process.env.heroText}</p>
+              <p>{process.env.NEXT_PUBLIC_heroText}</p>
             </div>
 
             <div className="button">
               <Button
-                href={"tel:" + process.env.PhoneNumber}
+                href={"tel:" + process.env.NEXT_PUBLIC_PhoneNumber}
                 fullWidth
                 size="large"
                 variant="contained"

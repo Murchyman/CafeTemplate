@@ -184,7 +184,7 @@ export default css.global`
       top: 0em;
       width: 100%;
       margin-right: 0em;
-      background-color: ${process.env.BackgroundColor};
+      background-color: ${process.env.NEXT_PUBLIC_BackgroundColor};
       margin-left: 0em;
     }
 
@@ -211,8 +211,7 @@ export default css.global`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: ${process.env.HeroSVG};
-    min-height: 100%;
-    outline: solid 0.2em ${process.env.HeroOutline};
+ 
+      min-height: 100%;
   }
 `;
