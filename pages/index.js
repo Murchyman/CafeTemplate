@@ -59,7 +59,7 @@ export default function Home() {
     //Looks up the s3 JSON file and perpetuates the data throughout the program, read function for more deets
     sendQuery();
 
-    alert(process.env.test)
+    alert(process.env.NEXT_PUBLIC_test)
   }, []);
 
   const retrieveMenuSection = (section) => {
