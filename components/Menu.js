@@ -25,16 +25,16 @@ const Menu = (props) => {
                         <div>
                             <h3>Reservations</h3>
                             <p>Please call us to discuss Reservations</p>
-                            <a href={"tel:" + process.env.PhoneNumber}>
-                                Phone: {process.env.PhoneNumber}
+                            <a href={"tel:" + process.env.NEXT_PUBLIC_PhoneNumber}>
+                                Phone: {process.env.NEXT_PUBLIC_PhoneNumber}
                             </a>
                         </div>
                     </div>
                     <div className="right">
                         <div>
                             <h3>Contact</h3>
-                            <a href={"tel:" + process.env.PhoneNumber}>
-                                Phone: {process.env.PhoneNumber}
+                            <a href={"tel:" + process.env.NEXT_PUBLIC_PhoneNumber}>
+                                Phone: {process.env.NEXT_PUBLIC_PhoneNumber}
                             </a>
 
                         </div>
@@ -67,8 +67,8 @@ const Menu = (props) => {
                             </a>
                             <br />
                             <br />
-                            <a href={"tel:" + process.env.PhoneNumber}>
-                                Phone: {process.env.PhoneNumber}
+                            <a href={"tel:" + process.env.NEXT_PUBLIC_PhoneNumber}>
+                                Phone: {process.env.NEXT_PUBLIC_PhoneNumber}
                             </a>
                         </div>
                     </div>
