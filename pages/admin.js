@@ -3,9 +3,8 @@ import SignOnForm from "../components/SignOnForm.js";
 import AdminDash from "../components/AdminDash.js";
 import { useState } from "react";
 
-const admin = () => {
-
-    const [authenticated, setAuthenticated] = useState(true);
+const Admin = () => {
+    const [authenticated, setAuthenticated] = useState(false);
 
     const ToggleAuthentication = () => {
         setAuthenticated(!authenticated);
@@ -20,6 +19,7 @@ const admin = () => {
             <SignOnForm ToggleAuthentication={ToggleAuthentication} />
         )
     }
+
 };
 
-export default admin;
+export default Admin
