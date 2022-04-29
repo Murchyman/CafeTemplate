@@ -36,23 +36,9 @@ import Menu from "../components/Menu";
 export default function Home() {
   const [hours, setHours] = useState("");
 
-  //This is really fucking stupid.....
-  //Basicaly, the menu nav has an undefined error because it's trying to access a third dimensional element but before the program reads the s3 bucket it's undefined.
-  //so it throws an error, thus I initialise the state and having a null element at [0][0] so it doesn't throw an error...... god help me.
-  //I also have empty elements at each of the other four indexes for the other menu headings.
-  //this is so messy and I'm sure I'll read this in a year with a better understanding of asyncronous programming and laugh my head off at the retardation.
-  const [RawJSON, setRawJSON] = useState(
-    [[[[]], [[]], [[]], [[]]]],
-    [[], [], [], [], [], [], []]
+  const [RawJSON, setRawJSON] = useState([]
   );
 
-  //need to find a way to do this so that I can have an undefined amount of sections, IE one section 100 sections
-  //I need to make it programatic in that way rather than manualy defining each section and having an empty section at the end that makes me want to scream.
-  const [MenuSection1, setMenuSection1] = useState([]);
-  const [MenuSection2, setMenuSection2] = useState([]);
-  const [MenuSection3, setMenuSection3] = useState([]);
-  const [MenuSection4, setMenuSection4] = useState([]);
-  const [TimeTable, setTimeTable] = useState([]);
   //prevents pop in by displaying nothing before data is loaded
   var [MenuIsLoaded, setMenuIsLoaded] = useState(false);
   useEffect(() => {
@@ -61,19 +47,19 @@ export default function Home() {
   }, []);
 
   const retrieveMenuSection = (section) => {
-    return section.map((item, index) => {
+    return section?.map((item, index) => {
       return (
         <div key={index + "maindiv"}>
           {/* would prefer it if this did not exist when not being displayed  */}
           <h1 key={"h1" + index} className="menuHeading">
-            {item.Heading}
+            {item?.Heading}
           </h1>
           <MenuItem
             key={index}
             keynum={index}
-            ItemName={item.ItemName}
-            ItemDescription={item.ItemDescription}
-            ItemPrice={item.ItemPrice}
+            ItemName={item?.ItemName}
+            ItemDescription={item?.ItemDescription}
+            ItemPrice={item?.ItemPrice}
           />
         </div>
       );
@@ -88,22 +74,10 @@ export default function Home() {
     )
       .then((res) => res.json())
       .then((data) => {
-        //used by the navigator side bar
         setRawJSON(data);
-        //would like to refactor this to work independantly of the actual number of sections rather than hard coded as I have done today
-        //Sends each section to it's own state which is then passed to the menu component and displayed there-in
-        setMenuSection1(retrieveMenuSection(data[0][0]));
-        setMenuSection2(retrieveMenuSection(data[0][1]));
-        setMenuSection3(retrieveMenuSection(data[0][2]));
-        setMenuSection4(retrieveMenuSection(data[0][3]));
-        setTimeTable(data[1]);
         //prevents pop in of menu when page loads
         setMenuIsLoaded(true);
-        const day = new Date().getDay();
-        //the 2nd(1st) index of the array is an array of elements, each of the 2nd dimention elements contains the times the store is open on the day of the week which the index corrosponds to
-        //IE 0 = Sunday = the time the store is open on Sunday
-        //It is important to note that we start on Sunday not monday
-        setHours(data[1][day]);
+
       });
   };
 
@@ -164,7 +138,13 @@ export default function Home() {
               <span>TODAY&apos;S HOURS</span>
               <br />
               <br />
-              <span>{hours}</span>
+
+
+              {/*the 2nd(1st) index of the array is an array of elements, each of the 2nd dimention elements contains the times the store is open on the day of the week which the index corrosponds to
+        IE 0 = Sunday = the time the store is open on Sunday
+        It is important to note that we start on Sunday not monday */}
+
+              <span>{RawJSON?.[1]?.[new Date().getDay()]}</span>
             </div>
             <div className="heroFoot">
               <a href="#Info" className="rowItem">
@@ -186,12 +166,15 @@ export default function Home() {
               <MenuNav Menu={RawJSON[0]} />
             </div>
             <div className="menu">
+              {/* the first (0th) index of the array is the menu, and the 2nd dimention elements are the section of the menu */}
+              {/* we retrieve the menu sections then pump them into a map that returns react elements, used as props in the component */}
               <Menu
-                MenuSection1={MenuSection1}
-                MenuSection2={MenuSection2}
-                MenuSection3={MenuSection3}
-                MenuSection4={MenuSection4}
-                OpenHours={TimeTable}
+                MenuSection1={retrieveMenuSection(RawJSON?.[0]?.[0])}
+                MenuSection2={retrieveMenuSection(RawJSON?.[0]?.[1])}
+                MenuSection3={retrieveMenuSection(RawJSON?.[0]?.[2])}
+                MenuSection4={retrieveMenuSection(RawJSON?.[0]?.[3])}
+                // the second (1st) index of the array is the time table, passed into the component
+                OpenHours={RawJSON[1]}
               />
             </div>
           </div>

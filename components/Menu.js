@@ -3,10 +3,10 @@ const Menu = (props) => {
 
     return (
         <>
-            <section id="MenuSection1">{props.MenuSection1}</section>
-            <section id="MenuSection2">{props.MenuSection2}</section>
-            <section id="MenuSection3">{props.MenuSection3}</section>
-            <section id="MenuSection4">{props.MenuSection4}</section>
+            <section id="MenuSection1">{props?.MenuSection1}</section>
+            <section id="MenuSection2">{props?.MenuSection2}</section>
+            <section id="MenuSection3">{props?.MenuSection3}</section>
+            <section id="MenuSection4">{props?.MenuSection4}</section>
             <section id="Info">
                 <h1 className="menuHeading">Information</h1>
                 <br />
@@ -14,13 +14,13 @@ const Menu = (props) => {
                     <div className="left">
                         <div>
                             <h3>Hours</h3>
-                            <p>Monday: {props.OpenHours[1]}</p>
-                            <p>Tuesday: {props.OpenHours[2]}</p>
-                            <p>Wednesday: {props.OpenHours[3]}</p>
-                            <p>Thursday: {props.OpenHours[4]}</p>
-                            <p>Friday: {props.OpenHours[5]}</p>
-                            <p>Saturday: {props.OpenHours[6]}</p>
-                            <p>Sunday: {props.OpenHours[0]}</p>
+                            <p>Monday: {props?.OpenHours?.[1]}</p>
+                            <p>Tuesday: {props?.OpenHours?.[2]}</p>
+                            <p>Wednesday: {props?.OpenHours?.[3]}</p>
+                            <p>Thursday: {props?.OpenHours?.[4]}</p>
+                            <p>Friday: {props?.OpenHours?.[5]}</p>
+                            <p>Saturday: {props?.OpenHours?.[6]}</p>
+                            <p>Sunday: {props?.OpenHours?.[0]}</p>
                         </div>
                         <div>
                             <h3>Reservations</h3>
