@@ -33,18 +33,10 @@ import MenuNav from "../components/MenuNav";
 import globalStyles from "../styles/global.js";
 import HomeModule from "../styles/HomeModule";
 import Menu from "../components/Menu";
+import useFetch from "../hooks/useFetch";
 export default function Home() {
-  const [hours, setHours] = useState("");
+  const { data: RawJSON, loading } = useFetch(process.env.NEXT_PUBLIC_S3URL);
 
-  const [RawJSON, setRawJSON] = useState([]
-  );
-
-  //prevents pop in by displaying nothing before data is loaded
-  var [MenuIsLoaded, setMenuIsLoaded] = useState(false);
-  useEffect(() => {
-    //Looks up the s3 JSON file and perpetuates the data throughout the program, read function for more deets
-    sendQuery();
-  }, []);
 
   const retrieveMenuSection = (section) => {
     return section?.map((item, index) => {
@@ -67,19 +59,7 @@ export default function Home() {
   };
 
   //retrieve a JSON doc containing the menu, deliniated by menu section, pass each array into it's own state.
-  const sendQuery = () => {
-    fetch(
-      // add to env variable
-      process.env.NEXT_PUBLIC_S3URL
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setRawJSON(data);
-        //prevents pop in of menu when page loads
-        setMenuIsLoaded(true);
 
-      });
-  };
 
   return (
     <>
@@ -90,7 +70,7 @@ export default function Home() {
       {/* //if data is not loaded don't display unpopulated menu */}
       <style jsx>{`
         .menuContainer {
-          ${MenuIsLoaded ? "" : "display: none;"}
+          ${loading ? "display: none;" : ""}
         }
       `}</style>
       <style jsx>{HomeModule}</style>
@@ -139,7 +119,6 @@ export default function Home() {
               <br />
               <br />
 
-
               {/*the 2nd(1st) index of the array is an array of elements, each of the 2nd dimention elements contains the times the store is open on the day of the week which the index corrosponds to
         IE 0 = Sunday = the time the store is open on Sunday
         It is important to note that we start on Sunday not monday */}
@@ -163,7 +142,7 @@ export default function Home() {
           </div>
           <div className="menuContainer">
             <div className="MenuNav">
-              <MenuNav Menu={RawJSON[0]} />
+              <MenuNav Menu={RawJSON?.[0]} />
             </div>
             <div className="menu">
               {/* the first (0th) index of the array is the menu, and the 2nd dimention elements are the section of the menu */}
@@ -174,7 +153,7 @@ export default function Home() {
                 MenuSection3={retrieveMenuSection(RawJSON?.[0]?.[2])}
                 MenuSection4={retrieveMenuSection(RawJSON?.[0]?.[3])}
                 // the second (1st) index of the array is the time table, passed into the component
-                OpenHours={RawJSON[1]}
+                OpenHours={RawJSON?.[1]}
               />
             </div>
           </div>
