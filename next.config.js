@@ -4,7 +4,5 @@ const nextConfig = {
 }
 
 module.exports = {
-  env: {
 
-  },
 } 

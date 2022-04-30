@@ -1,27 +1,42 @@
 import React from "react";
+import useFetch from "../hooks/useFetch.js";
 import globalStyles from "../styles/global.js";
 import TextField from "@mui/material/TextField";
 import { useEffect } from "react";
 
 const AdminDash = (props) => {
+    const { data, loading } = useFetch(
+        process.env.NEXT_PUBLIC_S3URL
+    );
+
+
     useEffect(() => {
-        GetJson();
-    }, []);
+        if (data) {
+            setTextFieldValue(JSON.stringify(data, null, 2));
+        }
+    }, [data]);
+
+
+    function pushData() {
+        const params = {
+            json: JSON.stringify(JSON.parse(TextFieldValue)),
+            file: `${process.env.NEXT_PUBLIC_Name}/Data.json`,
+        };
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(params)
+        };
+
+        fetch('https://nkc4n1ec95.execute-api.ap-southeast-2.amazonaws.com/default/MudjimbaUploadToS3', options)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+    }
 
     const [TextFieldValue, setTextFieldValue] = React.useState("");
-    const handleChange = (event) => {
-        setTextFieldValue(event.target.TextFieldValue);
-    };
 
-    const GetJson = () => {
-        fetch(
-            // add to env variable
-            process.env.NEXT_PUBLIC_S3URL
-        )
-            .then((res) => res.json())
-            .then((data) => JSON.stringify(data))
-            .then((data) => setTextFieldValue(data));
-    };
+
 
     return (
         <div>
@@ -50,15 +65,16 @@ const AdminDash = (props) => {
                 <div className="body">
                     <h1>Admin</h1>
                     <p>Welcome to the admin page</p>
-
                     <TextField
+                        style={{ backgroundColor: "white" }}
                         id="outlined-multiline-static"
                         multiline
                         fullWidth
                         min-rows={4}
                         value={TextFieldValue}
-                        onChange={handleChange}
+                        onChange={(event) => setTextFieldValue(event.target.value)}
                     />
+                    <button onClick={pushData}>Push Data</button>
                     <button onClick={() => props.ToggleAuthentication()}>Logout</button>
                 </div>
             </div>
