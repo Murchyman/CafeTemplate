@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import useFetch from "../hooks/useFetch.js";
 import globalStyles from "../styles/global.js";
 import TextField from "@mui/material/TextField";
@@ -40,6 +41,10 @@ const AdminDash = (props) => {
 
     return (
         <div>
+            <Head>
+                <title>Dashboard</title>
+            </Head>
+
             <style jsx global>
                 {globalStyles}
             </style>

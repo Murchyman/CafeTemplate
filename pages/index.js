@@ -24,11 +24,9 @@
     Then im gonna grab that rope and say are you ready? And you're gonna say yes and im just gonna PULL IT. While you BEG me, BEG me and I mean BEG me to kill you. And choke you, choke the worthless life out of your sorry ass.
 */
 
-import Head from "next/head";
 import { Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MenuItem from "../components/MenuItem";
-import { useEffect, useState } from "react";
 import MenuNav from "../components/MenuNav";
 import globalStyles from "../styles/global.js";
 import HomeModule from "../styles/HomeModule";
@@ -75,14 +73,7 @@ export default function Home() {
       `}</style>
       <style jsx>{HomeModule}</style>
 
-      <Head>
-        <title>{process.env.NEXT_PUBLIC_Name}</title>
-        <meta
-          name="description"
-          content={process.env.NEXT_PUBLIC_WebDescription}
-        />
-        <link rel="icon" href={process.env.NEXT_PUBLIC_Favicon} />
-      </Head>
+
       <div className="container">
         <div className="main">
           <p>

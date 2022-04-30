@@ -1,9 +1,11 @@
 import React from "react";
 import SignOnForm from "../components/SignOnForm.js";
 import AdminDash from "../components/AdminDash.js";
+import Head from "next/head";
 import { useState } from "react";
 
 const Admin = () => {
+
     const [authenticated, setAuthenticated] = useState(false);
 
     const ToggleAuthentication = () => {

@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head';
 import { useState } from 'react';
 import globalStyles from "../styles/global.js";
 import Paper from "@mui/material/Paper";
@@ -18,6 +19,9 @@ const SignOnForm = (props) => {
     };
     return (
         <>
+            <Head>
+                <title>Sign On</title>
+            </Head>
             <style jsx global>
                 {globalStyles}
             </style>
