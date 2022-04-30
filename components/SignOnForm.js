@@ -89,7 +89,6 @@ const SignOnForm = (props) => {
                                     }}
                                     type="email"
                                     name="email"
-                                    id="outlined-basic"
                                     label="Username"
                                     variant="outlined"
                                 />
@@ -104,7 +103,6 @@ const SignOnForm = (props) => {
                                     }}
                                     type="password"
                                     name="password"
-                                    id="outlined-basic"
                                     label="Password"
                                     variant="outlined"
                                 />
