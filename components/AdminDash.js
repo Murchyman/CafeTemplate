@@ -16,6 +16,7 @@ const AdminDash = (props) => {
   const [modalTitle, setModalTitle] = React.useState("");
   const [modalText, setModalText] = React.useState("");
   const [modalButton, setModalButton] = React.useState("");
+
   const { data, loading } = useFetch(process.env.NEXT_PUBLIC_S3URL);
 
   useEffect(() => {
@@ -47,8 +48,7 @@ const AdminDash = (props) => {
         data === "yes"
           ? alert("Data pushed successfully")
           : alert("An error occured");
-      })
-      .then(() => window.location.reload());
+      });
   }
 
   return (
