@@ -15,6 +15,7 @@ const AdminDash = (props) => {
   const [open, setOpen] = React.useState(false);
   const [modalTitle, setModalTitle] = React.useState("");
   const [modalText, setModalText] = React.useState("");
+  const [modalButton, setModalButton] = React.useState("");
   const { data, loading } = useFetch(process.env.NEXT_PUBLIC_S3URL);
 
   useEffect(() => {
@@ -24,10 +25,10 @@ const AdminDash = (props) => {
     }
   }, [data]);
 
-  function pushData() {
+  function pushData(json) {
     const params = {
       //json parse normalises the string that was disfigured by html then we can re-stringify it
-      json: JSON.stringify(JSON.parse(TextFieldValue)),
+      json: json,
       file: `${process.env.NEXT_PUBLIC_Name}/Data.json`,
     };
     const options = {
@@ -41,8 +42,13 @@ const AdminDash = (props) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        alert(data);
-      });
+        console.log(data);
+        //this is a workaround because I can't be bothered to update the lambda function to pit out something better than 'yes' :p
+        data === "yes"
+          ? alert("Data pushed successfully")
+          : alert("An error occured");
+      })
+      .then(() => window.location.reload());
   }
 
   return (
@@ -94,7 +100,12 @@ const AdminDash = (props) => {
 
       <Modal
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          setOpen(false);
+          setModalText("");
+          setModalTitle("");
+          setModalButton("");
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -118,6 +129,8 @@ const AdminDash = (props) => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {modalText}
           </Typography>
+          <br />
+          <div style={{ textAlign: "right" }}>{modalButton}</div>
         </Box>
       </Modal>
 
@@ -130,9 +143,24 @@ const AdminDash = (props) => {
               variant="contained"
               onClick={() => {
                 setOpen(true);
-                setModalTitle("Hard Reset");
                 setModalText(
                   "This will reset the menu to a known working version in the backend. This is a destructive action and cannot be undone."
+                );
+                setModalButton(
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                      setOpen(false);
+                      fetch(process.env.NEXT_PUBLIC_KnownWorkingData)
+                        .then((response) => response.json())
+                        .then((data) => {
+                          pushData(JSON.stringify(data));
+                        });
+                    }}
+                  >
+                    Hard Reset
+                  </Button>
                 );
               }}
             >
@@ -171,7 +199,9 @@ const AdminDash = (props) => {
             </Button>
             <Button
               size="large"
-              onClick={pushData}
+              onClick={() =>
+                pushData(JSON.stringify(JSON.parse(TextFieldValue)))
+              }
               variant="contained"
               endIcon={<ArrowForwardIcon />}
             >
