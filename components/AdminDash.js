@@ -48,6 +48,10 @@ const AdminDash = (props) => {
         data === "yes"
           ? alert("Data pushed successfully")
           : alert("An error occured");
+      })
+      //nav to home
+      .then(() => {
+        window.location.href = "/";
       });
   }
 
