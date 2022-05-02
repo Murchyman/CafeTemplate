@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import useFetch from "../hooks/useFetch.js";
+import { Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -54,6 +55,38 @@ const AdminDash = (props) => {
         window.location.href = "/";
       });
   }
+  const howto = `This page allows you to modify the menu,
+on this page you are working with a document format 
+known as JSON "JavaScript Object Notation".
+each item deliniated by curly braces "{}"
+represents either a heading or an item on the menu,
+you must place new items within their own 
+curly braces 
+OUTSIDE OF EXISTING ITEMS AND THEIR CURLY BRACES.
+EACH ITEM MUST BE DELINIATED BY A NEW LINE
+(enter/return).
+YOU MUST ENTER ITEM NAME, ITEM DESCRIPTION
+AND ITEM PRICE.
+FOR EACH ITEM FOLLOWING THE PATTERN
+OF THE OTHER ITEMS
+you can edit item prices as well as add new items.
+you can add new items by creating a new 
+element with curly brackets "{}"
+and then adding the item name and price in the 
+format observable by looking at the 
+patern of the other items.
+For example a new pizza called the 
+Steak pizza would be implemented like this 
+{
+    "ItemName": "Steak Pizza",
+    "ItemDescription": "Cheese, Steak",
+    "ItemPrice": "21"
+},
+ note the comma outside the brackets.
+Make sure to place the new item within 
+the bounds of the array []
+make sure to place each item 
+outside the bounds of other items`;
 
   return (
     <>
@@ -73,8 +106,16 @@ const AdminDash = (props) => {
             flex-direction: column;
             align-items: center;
           }
+          .Inputfield {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+          }
           .body {
-            width: 70vw;
+            width: 100vw;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -85,6 +126,7 @@ const AdminDash = (props) => {
             flex-direction: row;
             justify-content: flex-start;
             margin-top: 2em;
+
             width: 100%;
           }
           .Button {
@@ -94,10 +136,6 @@ const AdminDash = (props) => {
             position: absolute;
             top: 1em;
             right: 1em;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 13em;
           }
         `}
       </style>
@@ -119,7 +157,6 @@ const AdminDash = (props) => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 400,
             bgcolor: "background.paper",
             border: "2px solid #000",
             boxShadow: 24,
@@ -140,8 +177,6 @@ const AdminDash = (props) => {
 
       <div className="wrapper">
         <div className="body">
-          <h1>Admin</h1>
-          <p>Please call Mitch if you are confused 0490117140</p>
           <div className="Help">
             <Button
               variant="contained"
@@ -170,28 +205,28 @@ const AdminDash = (props) => {
             >
               hard reset
             </Button>
-            <Button
-              variant="contained"
-              onClick={() => {
-                setOpen(true);
-                setModalTitle("Help");
-                setModalText(
-                  "This is the admin dashboard. Here you can upload data to the server. This is a JSON file. Please make sure that the data is in the correct format. If you are unsure about the format, please contact Mitch."
-                );
-              }}
-            >
-              Help
-            </Button>
           </div>
-          <TextField
-            style={{ backgroundColor: "white" }}
-            id="outlined-multiline-static"
-            multiline
-            fullWidth
-            maxRows={25}
-            value={TextFieldValue}
-            onChange={(event) => setTextFieldValue(event.target.value)}
-          />
+          <div className="Inputfield">
+            <TextField
+              style={{
+                backgroundColor: "white",
+                width: "80%",
+                margin: "2em",
+              }}
+              id="outlined-multiline-static"
+              multiline
+              fullWidth
+              maxRows={25}
+              value={TextFieldValue}
+              onChange={(event) => setTextFieldValue(event.target.value)}
+            />
+            <Paper
+              style={{ width: "30%", margin: "1em", padding: "1em" }}
+              variant="outlined"
+            >
+              <pre>{howto}</pre>
+            </Paper>
+          </div>
           <div className="Buttons">
             <Button
               style={{ marginRight: "1em" }}
