@@ -56,23 +56,28 @@ const AdminDash = (props) => {
       });
   }
   const howto = `This page allows you to modify the menu,
-on this page you are working with a document format 
+on this page you are working with a 
+document format 
 known as JSON "JavaScript Object Notation".
 each item deliniated by curly braces "{}"
-represents either a heading or an item on the menu,
+represents either a heading or an 
+item on the menu,
 you must place new items within their own 
 curly braces 
-OUTSIDE OF EXISTING ITEMS AND THEIR CURLY BRACES.
+OUTSIDE OF EXISTING ITEMS AND THEIR 
+CURLY BRACES.
 EACH ITEM MUST BE DELINIATED BY A NEW LINE
 (enter/return).
 YOU MUST ENTER ITEM NAME, ITEM DESCRIPTION
 AND ITEM PRICE.
 FOR EACH ITEM FOLLOWING THE PATTERN
 OF THE OTHER ITEMS
-you can edit item prices as well as add new items.
+you can edit item prices as well
+as add new items.
 you can add new items by creating a new 
 element with curly brackets "{}"
-and then adding the item name and price in the 
+and then adding the item name
+and price in the 
 format observable by looking at the 
 patern of the other items.
 For example a new pizza called the 

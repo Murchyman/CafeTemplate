@@ -34,8 +34,6 @@ import Menu from "../components/Menu";
 import useFetch from "../hooks/useFetch";
 export default function Home() {
   const { data: RawJSON, loading } = useFetch(process.env.NEXT_PUBLIC_S3URL);
-
-
   const retrieveMenuSection = (section) => {
     return section?.map((item, index) => {
       return (
@@ -55,10 +53,6 @@ export default function Home() {
       );
     });
   };
-
-  //retrieve a JSON doc containing the menu, deliniated by menu section, pass each array into it's own state.
-
-
   return (
     <>
       <style jsx global>
@@ -72,7 +66,6 @@ export default function Home() {
         }
       `}</style>
       <style jsx>{HomeModule}</style>
-
 
       <div className="container">
         <div className="main">
